@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'piano_emulator.ui'
 #
-# Created: Sat Jan  3 12:57:27 2015
+# Created: Sat Jan  3 21:46:18 2015
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -29,22 +29,16 @@ class Ui_MainWindow(object):
         MainWindow.resize(377, 301)
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
-        self.gvPianoBoard = QtGui.QGraphicsView(self.centralwidget)
-        self.gvPianoBoard.setGeometry(QtCore.QRect(10, 10, 357, 100))
-        font = QtGui.QFont()
-        font.setFamily(_fromUtf8("微软雅黑"))
-        font.setPointSize(9)
-        self.gvPianoBoard.setFont(font)
-        self.gvPianoBoard.setObjectName(_fromUtf8("gvPianoBoard"))
         self.sliderNoteLength = QtGui.QSlider(self.centralwidget)
         self.sliderNoteLength.setGeometry(QtCore.QRect(70, 120, 81, 22))
         font = QtGui.QFont()
         font.setFamily(_fromUtf8("微软雅黑"))
         font.setPointSize(9)
         self.sliderNoteLength.setFont(font)
-        self.sliderNoteLength.setMinimum(1)
-        self.sliderNoteLength.setMaximum(3)
+        self.sliderNoteLength.setMinimum(0)
+        self.sliderNoteLength.setMaximum(2)
         self.sliderNoteLength.setPageStep(1)
+        self.sliderNoteLength.setProperty("value", 0)
         self.sliderNoteLength.setOrientation(QtCore.Qt.Horizontal)
         self.sliderNoteLength.setObjectName(_fromUtf8("sliderNoteLength"))
         self.btnAddEmptyNote = QtGui.QPushButton(self.centralwidget)
@@ -76,13 +70,13 @@ class Ui_MainWindow(object):
         font.setPointSize(9)
         self.libNoteLength.setFont(font)
         self.libNoteLength.setObjectName(_fromUtf8("libNoteLength"))
-        self.tecRecord = QtGui.QTextEdit(self.centralwidget)
-        self.tecRecord.setGeometry(QtCore.QRect(10, 150, 357, 111))
+        self.teRecord = QtGui.QTextEdit(self.centralwidget)
+        self.teRecord.setGeometry(QtCore.QRect(10, 150, 357, 111))
         font = QtGui.QFont()
         font.setFamily(_fromUtf8("微软雅黑"))
         font.setPointSize(9)
-        self.tecRecord.setFont(font)
-        self.tecRecord.setObjectName(_fromUtf8("tecRecord"))
+        self.teRecord.setFont(font)
+        self.teRecord.setObjectName(_fromUtf8("teRecord"))
         self.btnLoad = QtGui.QPushButton(self.centralwidget)
         self.btnLoad.setGeometry(QtCore.QRect(10, 270, 51, 23))
         font = QtGui.QFont()
@@ -113,12 +107,19 @@ class Ui_MainWindow(object):
         self.btnPlay.setObjectName(_fromUtf8("btnPlay"))
         self.leKeyboardPlay = QtGui.QLineEdit(self.centralwidget)
         self.leKeyboardPlay.setGeometry(QtCore.QRect(130, 270, 113, 20))
+        font = QtGui.QFont()
+        font.setFamily(_fromUtf8("微软雅黑"))
+        font.setPointSize(9)
+        self.leKeyboardPlay.setFont(font)
         self.leKeyboardPlay.setObjectName(_fromUtf8("leKeyboardPlay"))
+        self.pianoKeyboard = QtGui.QLabel(self.centralwidget)
+        self.pianoKeyboard.setGeometry(QtCore.QRect(10, 10, 357, 100))
+        self.pianoKeyboard.setObjectName(_fromUtf8("pianoKeyboard"))
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
         QtCore.QObject.connect(self.btnClear, QtCore.SIGNAL(_fromUtf8("clicked()")), self.leKeyboardPlay.clear)
-        QtCore.QObject.connect(self.btnClear, QtCore.SIGNAL(_fromUtf8("clicked()")), self.tecRecord.clear)
+        QtCore.QObject.connect(self.btnClear, QtCore.SIGNAL(_fromUtf8("clicked()")), self.teRecord.clear)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -131,4 +132,5 @@ class Ui_MainWindow(object):
         self.btnSave.setText(_translate("MainWindow", "保存", None))
         self.btnClear.setText(_translate("MainWindow", "清空", None))
         self.btnPlay.setText(_translate("MainWindow", "播放", None))
+        self.pianoKeyboard.setText(_translate("MainWindow", "PianoKeyboard", None))
 

@@ -14,22 +14,6 @@
    <string>PianoEmulator</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QGraphicsView" name="gvPianoBoard">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>357</width>
-      <height>100</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>微软雅黑</family>
-      <pointsize>9</pointsize>
-     </font>
-    </property>
-   </widget>
    <widget class="QSlider" name="sliderNoteLength">
     <property name="geometry">
      <rect>
@@ -46,13 +30,16 @@
      </font>
     </property>
     <property name="minimum">
-     <number>1</number>
+     <number>0</number>
     </property>
     <property name="maximum">
-     <number>3</number>
+     <number>2</number>
     </property>
     <property name="pageStep">
      <number>1</number>
+    </property>
+    <property name="value">
+     <number>0</number>
     </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
@@ -137,7 +124,7 @@
      <string>音符长度</string>
     </property>
    </widget>
-   <widget class="QTextEdit" name="tecRecord">
+   <widget class="QTextEdit" name="teRecord">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -238,6 +225,25 @@
       <height>20</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="QLabel" name="pianoKeyboard">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>357</width>
+      <height>100</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>PianoKeyboard</string>
+    </property>
    </widget>
   </widget>
  </widget>
@@ -262,7 +268,7 @@
   <connection>
    <sender>btnClear</sender>
    <signal>clicked()</signal>
-   <receiver>tecRecord</receiver>
+   <receiver>teRecord</receiver>
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
