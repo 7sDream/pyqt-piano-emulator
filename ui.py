@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\7sDream\Nutstore\WorkSpace\Github\pyqt-piano-emulator\piano_emulator.ui'
+# Form implementation generated from reading ui file 'C:\Users\*****\Nutstore\WorkSpace\Github\pyqt-piano-emulator\piano_emulator.ui'
 #
 # Created: Sat Jan  3 12:42:03 2015
 #      by: PyQt4 UI code generator 4.10.4
