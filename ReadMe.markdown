@@ -5,6 +5,7 @@
 ```
 PYQT-PIANO-EMULATOR
 |
+|   build.bat
 |   keyboardMap.png
 |   noteUtils.py
 |   pianoBoard.bmp
@@ -22,6 +23,7 @@ PYQT-PIANO-EMULATOR
 - `noteUtils.py`为音符弹奏的杂七杂八工具类
 - `pianoBoard.bmp`是钢琴键盘图
 - `keyboardMap.png`是键盘音符对应图
+- `build.bat`使用cxfreeze编译
 
 ---
 
@@ -75,6 +77,7 @@ KEYMAP_NOTE = [scale + str(degree) for degree in range(6, 2, -1)
 END
 
 Author: 7sDream
+
 FinishTime: 2015.1.4
 
   [firstscreen]: http://ww4.sinaimg.cn/large/88e401f0gw1enxc8rdp4uj20ax09gjsi.jpg
