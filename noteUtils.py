@@ -1,8 +1,9 @@
 __author__ = '7sDream'
 
-import numpy as n
 import winsound
 import time
+
+import numpy as n
 
 
 FS = 44100
