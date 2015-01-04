@@ -231,6 +231,9 @@
       <pointsize>9</pointsize>
      </font>
     </property>
+    <property name="maxLength">
+     <number>0</number>
+    </property>
    </widget>
    <widget class="QLabel" name="pianoKeyboard">
     <property name="geometry">

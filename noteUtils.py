@@ -3,6 +3,8 @@ __author__ = '7sDream'
 import numpy as n
 import winsound
 import time
+
+
 FS = 44100
 dt = 1.0 / FS
 
@@ -22,6 +24,13 @@ FREQTABLE = [
     [35, 69, 139, 277, 554, 1109, 2217, 4434],
     [33, 65, 131, 262, 523, 1047, 2093, 4186]]
 SCALETABLE = ['B', 'AB', 'A', 'GA', 'G', 'FG', 'F', 'E', 'DE', 'D', 'CD', 'C']
+KEYMAP_KEY = ['1', '2', '3', '4', '5', '6', '7',
+              'q', 'w', 'e', 'r', 't', 'y', 'u',
+              'a', 's', 'd', 'f', 'g', 'h', 'j',
+              'z', 'x', 'c', 'v', 'b', 'n', 'm']
+KEYMAP_NOTE = [scale + str(degree) for degree in range(6, 2, -1)
+               for scale in ['C', 'D', 'E', 'F', 'G', 'A', 'B']]
+KEYMAP = dict(zip(KEYMAP_KEY, KEYMAP_NOTE))
 
 
 class Note():
@@ -32,6 +41,10 @@ class Note():
         self._signal = note_signal
 
     def play(self):
+        # How to play wav file in windows?
+        # winsound.PlaySound will raise a error
+        # on my computer
+        # Use beep instead temporarily.
         winsound.Beep(int(self.freq), int(self.length))
 
 
@@ -63,32 +76,50 @@ class NoteUtils():
                     break
         # noinspection PyTypeChecker
         note_text = table[row][col] + LENGTHSUFFFIX[length]
-        self.play_by_text(note_text)
+        self.play_note(note_text)
         return note_text
 
-    def play_by_text(self, note_text):
-        try:
-            length = LENGTHSUFFFIX.index(note_text[-1])
-            if len(note_text) >= 3:
-                scale_in_text = note_text[:-2]
-                scale = SCALETABLE.index(scale_in_text)
-                degree = int(note_text[-2])
-                self.play_note_by_args(scale, degree, length)
-            else:
-                time.sleep(LENGTHTABLE[length])
-        except (ValueError, IndexError) as e:
-            print("the note text '" + note_text + "' is invalid")
+    def play_note(self, *args):
+        if len(args) == 3:
+            (scale, degree, length) = args
+            try:
+                self.notes[length][scale][degree].play()
+            except ValueError as e:
+                print(e)
+                print('Must be three int')
+        elif len(args) == 1:
+            note_text = args[0]
+            if not isinstance(note_text, str):
+                raise ValueError('Must be one str or three int')
+            try:
+                length = LENGTHSUFFFIX.index(note_text[-1])
+                if len(note_text) >= 3:
+                    scale_in_text = note_text[:-2]
+                    scale = SCALETABLE.index(scale_in_text)
+                    degree = int(note_text[-2])
+                    self.play_note(scale, degree, length)
+                else:
+                    time.sleep(LENGTHTABLE[length])
+            except (ValueError, IndexError) as e:
+                print(e)
+                print("the note text '" + note_text + "' is invalid")
+        else:
+            raise ValueError('Must be one str or three int')
 
-    def play_note_by_args(self, scale, degree, length):
-        self.notes[length][scale][degree].play()
-
-    def get_empty_note_text_by_length(self, length):
+    def get_empty_note(self, length):
         return '0' + LENGTHSUFFFIX[length]
 
-    def play_note_texts(self, notetexts):
-        notes = notetexts.split(',')
+    def play_notes(self, note_texts):
+        notes = note_texts.split(',')
         for note in notes:
-            self.play_by_text(note)
+            self.play_note(note)
+
+    def key_2_text_and_play(self, name, length):
+        if name in KEYMAP:
+            note_text = KEYMAP[name] + LENGTHSUFFFIX[length]
+            self.play_note(note_text)
+            return note_text
+        return ''
 
 
 def _init_notes():

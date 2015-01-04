@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'piano_emulator.ui'
 #
-# Created: Sat Jan  3 21:46:18 2015
+# Created: Sun Jan  4 10:38:03 2015
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -111,6 +111,7 @@ class Ui_MainWindow(object):
         font.setFamily(_fromUtf8("微软雅黑"))
         font.setPointSize(9)
         self.leKeyboardPlay.setFont(font)
+        self.leKeyboardPlay.setMaxLength(0)
         self.leKeyboardPlay.setObjectName(_fromUtf8("leKeyboardPlay"))
         self.pianoKeyboard = QtGui.QLabel(self.centralwidget)
         self.pianoKeyboard.setGeometry(QtCore.QRect(10, 10, 357, 100))

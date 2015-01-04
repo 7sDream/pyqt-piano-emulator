@@ -12,29 +12,43 @@ class Win(QtGui.QMainWindow):
         super(Win, self).__init__(parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+
         self.setFixedSize(self.width(), self.height())
+        self.ui.leKeyboardPlay.setAlignment(QtCore.Qt.AlignCenter)
         self.ui.pianoKeyboard.setPixmap(QtGui.QPixmap('./pianoBoard.bmp'))
-        self.ui.pianoKeyboard.mousePressEvent = self.piano_keyboard_clicked
 
         # noinspection PyUnresolvedReferences
         self.ui.sliderNoteLength.valueChanged.connect(self.slider_changed)
+
+        self.ui.pianoKeyboard.mousePressEvent = self.piano_keyboard_clicked
+
         QtCore.QObject.connect(self.ui.btnAddEmptyNote,
                                QtCore.SIGNAL("clicked()"),
                                self.add_empty_note)
+
         QtCore.QObject.connect(self.ui.btnPlay,
                                QtCore.SIGNAL("clicked()"),
                                self.play_notes)
+
         QtCore.QObject.connect(self.ui.btnLoad,
                                QtCore.SIGNAL("clicked()"),
                                self.load_file)
+
         QtCore.QObject.connect(self.ui.btnSave,
                                QtCore.SIGNAL("clicked()"),
                                self.save_file)
+
+        self.ui.leKeyboardPlay.keyPressEvent = self.keyboard_play
 
     def piano_keyboard_clicked(self, event):
         text = utils.pos_2_text_and_play(event.x(), event.y(),
                                          self.ui.sliderNoteLength.value())
         self.add_note(text)
+
+    def keyboard_play(self, event):
+        note_text = utils.key_2_text_and_play(event.text(),
+                                              self.ui.sliderNoteLength.value())
+        self.add_note(note_text)
 
     def slider_changed(self, new_value):
         if new_value == 0:
@@ -45,18 +59,18 @@ class Win(QtGui.QMainWindow):
             self.ui.labSecond.setText('1/8 秒')
 
     def add_empty_note(self):
-        self.add_note(utils.get_empty_note_text_by_length(
+        self.add_note(utils.get_empty_note(
             self.ui.sliderNoteLength.value()
         ))
 
     def add_note(self, text):
-        if self.ui.btnRecord.isChecked():
+        if self.ui.btnRecord.isChecked() and text != '':
             origintext = self.ui.teRecord.toPlainText()
             self.ui.teRecord.insertPlainText(text if origintext == '' else
                                              ',' + text)
 
     def play_notes(self):
-        utils.play_note_texts(self.ui.teRecord.toPlainText())
+        utils.play_notes(self.ui.teRecord.toPlainText())
 
     def load_file(self):
         filedialog = QtGui.QFileDialog()
